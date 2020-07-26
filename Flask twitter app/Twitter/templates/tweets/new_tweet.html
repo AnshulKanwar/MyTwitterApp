@@ -1,0 +1,22 @@
+{% extends "main_layout.html" %}
+{% block content %}
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group container mt-4">
+        <legend class="m-2 mb-4 border-bottom display-5">New Tweet</legend>
+        <div class="form-group mt-3">
+            {% if form.content.errors %}
+                {{ form.content(class='form-control form-control-lg is-invalid', rows=6, placeholder="What's Happening?", style='border-radius: 20px') }}
+                {% for error in form.content.errors %}
+                    <span class="invalid-feedback">{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.content(class='form-control form-control-lg p-4', rows=5, placeholder="What's Happening?", style='border-radius: 20px') }}
+            {% endif %}
+        </div>
+        <div>
+            <div class="float-right">{{ form.tweet(class='btn btn-tweet mt-2', style='width: 150px') }}</div>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

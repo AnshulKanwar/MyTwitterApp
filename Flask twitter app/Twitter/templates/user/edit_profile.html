@@ -1,0 +1,170 @@
+{% extends "main_layout.html" %} {% block content %}
+<div class="row border-bottom">
+  <a
+    href="{{ url_for('user.display_profile', username=current_user.username) }}"
+    class="back-btn"
+  >
+    <div class="m-1 back-btn">
+      <svg
+        width="2.2em"
+        height="2.2em"
+        viewBox="0 0 16 16"
+        class="bi bi-arrow-left-short"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.854 4.646a.5.5 0 0 1 0 .708L5.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"
+        />
+        <path
+          fill-rule="evenodd"
+          d="M4.5 8a.5.5 0 0 1 .5-.5h6.5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"
+        />
+      </svg>
+    </div>
+  </a>
+  <div class="col m-1 ml-3">
+    <div class="row" style="font-weight: 700; font-size: 17px;">
+      {{ current_user.name }}
+    </div>
+    <div class="row text-muted" style="font-size: 14px;">190 Tweets</div>
+  </div>
+</div>
+<div class="row">
+  {% if current_user.header %}
+  <img
+    src="{{ url_for('static', filename='headers/'+current_user.header) }}"
+    alt=""
+  />
+  {% else %}
+  <div
+    class="header"
+    style="width: 100%; height: 200px; background-color: #ccd6dd;"
+  ></div>
+  {% endif %}
+</div>
+<div class="row profile-display">
+  <img
+    src="{{ url_for('static', filename='profile_pics/' + current_user.profile_picture) }}"
+    alt=""
+    class="rounded-circle"
+  />
+  <a href="{{ url_for('user.profile') }}" class="btn btn-outline-primary"
+    >Edit Profile</a
+  >
+</div>
+<div class="row below-header border-bottom">
+  <div class="col m-1 ml-3">
+    <div class="row" style="font-weight: 700; font-size: 17px;">
+      {{ current_user.name }}
+      {% if current_user.is_verified %}
+      <span class="m-1 ml-2" style="color: #1DA1F2;">
+        <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-patch-check-fll" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984a.5.5 0 0 0-.708-.708L7 8.793 5.854 7.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+        </svg>
+      </span>
+      {% endif %}
+    </div>
+    <div class="row mb-2 text-muted" style="font-size: 14px;">
+      @{{ current_user.username }}
+    </div>
+    <div class="row mb-2 mr-2" style="font-size: 16px;">
+      {% if current_user.bio %}
+      {{ current_user.bio }}
+      {% endif %}
+    </div>
+    <div class="row mb-1 text-muted" style="font-size: 16px;">
+      <span class="mt-1" style="color: #657786;">
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          class="bi bi-calendar3"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+          />
+        </svg>
+      </span>
+      <span class="ml-2"
+        >Joined {{ current_user.date_joined.strftime('%B %Y') }}</span
+      >
+    </div>
+    <div class="row mb-2" style="font-size: 17px;">
+      <div class="mr-2">
+        <span style="font-weight: 700;">{{ current_user.following }}</span>
+        <span class="text-muted">Following</span>
+      </div>
+      <div>
+        <span style="font-weight: 700;">{{ current_user.followers }}</span>
+        <span class="text-muted">Followers</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <div class="row p-4">
+        <div class="form-group col-6">
+          {{ form.header.label }}
+          {{ form.header(class='form-control-file') }}
+          {% if form.header.errors %}
+            {% for error in form.header.errors %}
+              <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <div class="form-group col-6">
+          {{ form.profile_picture.label }} {{
+          form.profile_picture(class='form-control-file') }}
+          {% if form.profile_picture.errors %}
+            {% for error in form.header.errors %}
+              <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="form-group m-3">
+        {{ form.name.label(class="form-check-label") }} {% if form.name.errors
+        %} {{ form.name(class="form-control form-control-lg is-invalid",
+        placeholder="name", style="border-radius: 20px") }}
+        <div class="invalid-tooltip">
+          {% for error in form.name.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.name(class="form-control form-control-lg",
+        placeholder="name", style="border-radius: 20px") }} {% endif %}
+      </div>
+      <div class="form-group m-3">
+        {{ form.bio.label(class="form-check-label") }} {% if form.bio.errors %}
+        {{ form.bio(class="form-control form-control-lg is-invalid",
+        placeholder="Add your bio", rows=6, style="border-radius: 20px") }}
+        <div class="invalid-tooltip">
+          {% for error in form.bio.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.bio(class="form-control form-control-lg",
+        placeholder="Add your bio", rows=6, style="border-radius: 20px") }}
+      </div>
+      {% endif %}
+    </fieldset>
+    <div>
+      <div class="float-right">
+        {{ form.submit(class='btn btn-tweet mt-2', style='width: 150px') }}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

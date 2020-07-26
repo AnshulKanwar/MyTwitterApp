@@ -1,0 +1,61 @@
+{% extends "user/layout.html" %} {% block content %}
+<div class="content-section mx-auto">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group" style="margin-bottom: 0px;">
+      <div class="row mt-3">
+        <div class="col-md-8 mx-auto">
+          <legend class="text-center" style="font-weight: 700;">
+            Login to Twitter
+          </legend>
+        </div>
+      </div>
+      <!-- username -->
+      <div class="form-group m-3">
+        {{ form.username.label(class="form-check-label") }} {% if
+        form.username.errors %}
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">@</span>
+          </div>
+          {{ form.username(class="form-control form-control-lg is-invalid",
+          placeholder="Username") }}
+          <div class="invalid-tooltip">
+            {% for error in form.username.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% else %}
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">@</span>
+          </div>
+          {{ form.username(class="form-control form-control-lg",
+          placeholder="Username") }}
+        </div>
+        {% endif %}
+      </div>
+      <div class="form-group m-3 mt-4">
+        {{ form.password.label(class="form-check-label") }} {{
+        form.password(class="form-control form-control-lg",
+        placeholder="Password") }}
+      </div>
+    </fieldset>
+    <div class="form-group row">
+      <div class="col-md-12 mx-auto">
+        <span class="d-flex justify-content-center">
+          {{ form.submit(class="btn btn-tweet ml-3 mr-3 w-100") }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mx-auto text-center">
+        <a href="">Forgot Password?</a>
+        &bull;
+        <a href="{{ url_for('user.register') }}">Sign Up for Twitter</a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
